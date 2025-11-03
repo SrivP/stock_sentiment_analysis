@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from datetime import timedelta
-
+import uvicorn
 
 app = FastAPI()
 analyzer = SentimentIntensityAnalyzer()
@@ -216,3 +216,7 @@ def compare_stock(symbol: str):
         "mean_price": float(mean_price)
 
     }
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)

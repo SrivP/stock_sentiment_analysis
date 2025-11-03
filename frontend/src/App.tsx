@@ -29,7 +29,13 @@ interface StockData {
   mean_price: number;
 }
 
+const API_BASE =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:8000"
+    : import.meta.env.VITE_API_BASE_URL;
+
 function App() {
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const [stockData, setStockData] = useState<StockData | null>(null);
   const [symbol, setSymbol] = useState("AAPL");
   const [inputValue, setInputValue] = useState("AAPL");
@@ -40,7 +46,7 @@ function App() {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get(`http://localhost:8000/compare/${ticker}`);
+      const res = await axios.get(`${API_BASE}/compare/${ticker}`);
       console.log("Response data:", res.data);
       setStockData(res.data);
       setSymbol(ticker);
