@@ -29,11 +29,6 @@ interface StockData {
   mean_price: number;
 }
 
-const API_BASE =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:8000"
-    : import.meta.env.VITE_API_BASE_URL;
-
 function App() {
   const API_BASE = import.meta.env.VITE_API_BASE_URL;
   const [stockData, setStockData] = useState<StockData | null>(null);
